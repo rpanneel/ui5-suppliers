@@ -1,0 +1,131 @@
+{
+	"_version": "1.17.0",
+	"sap.app": {
+		"id": "be.rpan.epm.suppliers",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"dataSources": {
+			"mainService": {
+				"uri": "/sap/opu/odata/sap/EPM_REF_APPS_SHOP_SRV",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0"
+				}
+			}
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		}
+	},
+	"sap.ui5": {
+		"rootView": {
+			"viewName": "be.rpan.epm.suppliers.view.App",
+			"type": "XML",
+			"async": true,
+			"id": "app"
+		},
+		"dependencies": {
+			"minUI5Version": "1.72",
+			"libs": {
+				"sap.m": {}
+			}
+		},
+		"componentUsages": {
+			"productsComponent": {
+				"name": "be.rpan.epm.products",
+				"settings": {},
+				"componentData": {},
+				"lazy": true
+			}
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "be.rpan.epm.suppliers.i18n.i18n"
+				}
+			},
+			"": {
+				"dataSource": "mainService",
+				"defaultBindingMode": "TwoWay",
+				"preload": true,
+				"settings": {
+					"useBatch": true,
+					"defaultCountMode": "Inline",
+					"json": true
+				}
+			}
+		},
+		"resources": {
+			"css": [],
+			"js": []
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"path": "be.rpan.epm.suppliers.view",
+				"controlId": "app",
+				"controlAggregation": "pages",
+				"transition": "slide",
+				"bypassed": {
+					"target": "notFound"
+				},
+				"async": true
+			},
+			"routes": [
+				{
+					"name": "list",
+					"pattern": "",
+					"target": "list"
+				},
+				{
+					"name": "detail",
+					"pattern": "detail/{id}",
+					"target": {
+						"name": "products",
+						"prefix": "p"
+					}
+				}
+			],
+			"targets": {
+				"list": {
+					"type": "View",
+					"id": "list",
+					"name": "List",
+					"title": "suppliers List"
+				},
+				"detail": {
+					"type": "View",
+					"id": "detail",
+					"name": "Detail",
+					"title": "{Name}"
+				},
+				"products": {
+					"type": "Component",
+					"usage": "productsComponent",
+					"parent": "detail",
+					"controlId": "box",
+					"controlAggregation": "items",
+					"id": "productInSupplier"
+				},
+				"notFound": {
+					"type": "View",
+					"id": "notFound",
+					"name": "NotFound",
+					"transition": "show"
+				}
+			}
+		}
+	}
+}

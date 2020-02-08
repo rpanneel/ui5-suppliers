@@ -1,0 +1,47 @@
+<mvc:View
+	controllerName="be.rpan.epm.suppliers.controller.List"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	displayBlock="true">
+	<Page id="page"
+		showHeader="false"
+		enableScrolling="true"
+		class="sapUiContentPadding">
+		<Table
+			inset="false"
+			busyIndicatorDelay="0"
+			items="{/Suppliers}">
+			<headerToolbar>
+				<OverflowToolbar>
+					<content>
+						<Title
+							text="{i18n>listViewTitle}"
+							level="H2" />
+						<ToolbarSpacer />
+					</content>
+				</OverflowToolbar>
+			</headerToolbar>
+			<columns>
+				<Column width="12em">
+					<Text text="ID" />
+				</Column>
+				<Column>
+					<Text text="Name" />
+				</Column>
+				<Column>
+					<Text text="Address" />
+				</Column>
+			</columns>
+			<items>
+				<ColumnListItem type="Navigation"
+					press="onPressListItem">
+					<cells>
+						<Text text="{Id}" />
+						<Text text="{Name}" />
+						<Text text="{FormattedAddress}" />
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+	</Page>
+</mvc:View>
