@@ -64,7 +64,7 @@ sap.ui.define([
 							this.fireEvent(eventMapping.forward, event.getParameters());
 						}
 					}.bind(this));
-				});
+				}.bind(this));
 			}
 		}
 	};
